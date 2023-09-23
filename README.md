@@ -1,0 +1,1 @@
+Investigating the acquistion of wh-dpendencies under noise constraints. The main learning model is a Fragment Grammar model run on child directed wh-questions with varying levels of noise to remove some proportion of learned lexical items.  
