@@ -10,4 +10,7 @@ cd ..
 Rscript grammar_format.R $2 $3
 
 # adding smoothed rules to grammar output and adding this file back into the FG folder
-python /Users/niels/Desktop/FG_project/noise_project/grammar_fix.py $2 $3 
+python /Users/niels/Desktop/FG_project/noise_project/grammar_fix.py $2 $3
+
+# creating our testing stimuli. pulls out the lexical items from the grammar and adds WUG in the stimuli if a word doesn't appear in the grammar
+python /Users/niels/Desktop/FG_project/noise_project/add_wug.py $2 $3
