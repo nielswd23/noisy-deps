@@ -3,7 +3,7 @@ python /Users/niels/Desktop/FG_project/noise_project/noisy_input_tokens.py $1 $2
 
 # now leaning a FG on created stimuli
 cd ~/Desktop/FG_project/noise_project/fg-source-code-restore/
-python /Users/niels/Desktop/FG_project/noise_project/fg_learn_command.py $2 $3
+python ../fg_learn_command.py $2 $3
 
 # R formating the grammar output to make reading in python easier
 cd ..
@@ -14,3 +14,14 @@ python /Users/niels/Desktop/FG_project/noise_project/grammar_fix.py $2 $3
 
 # creating our testing stimuli. pulls out the lexical items from the grammar and adds WUG in the stimuli if a word doesn't appear in the grammar
 python /Users/niels/Desktop/FG_project/noise_project/add_wug.py $2 $3
+
+# testing FG on generated test sets
+cd ~/Desktop/FG_project/noise_project/fg-source-code-restore/
+python ../fg_test_command.py $2 $3
+
+# move output files
+cd ..
+python move_output_data.py $2 $3
+
+# produce plots
+Rscript generate_plots.R $2 $3
