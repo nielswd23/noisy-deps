@@ -5,7 +5,7 @@ Investigating the acquistion of wh-dpendencies under noise constraints. The main
 The main bit of code to add noise to child-directed dependency input is the noisy_input_tokens.py file. This script reads the dependency files located in the "dependencies" folder and probabilistically replaces lexical items with a special string that denotes an unseen item, "UNK," and returns dependency files that will get fed into the main FG model. This script takes 3 arguments. The first argument is the alpha parameter, [0,inf), that controls how often the lexical items are removed (higher alpha leads to higher noise). This noise process is modeling the recency effect in that the farther from the end of the utterance, the higher likelihood the lexical item will be removed. The next argument is a label to keep track of the output files. And the last argument is the number of runs controlling how many output files the script will produce.
 
 Another main component of this repository is the shell script, which automates a full run of this model: from the noisy_input_tokens.py to testing the FG model to reformatting the output to producing plots for the results. This script takes in the same arguments as the noisy_input_tokens.py file and can be run from the command line using the following command:
-> sh token_noise.sh <alpha> <alpha_label> <num runs>
+> sh token_noise.sh $<alpha> <alpha_label> <num_runs>$
 
 For example, running "sh token_noise.sh 0.05 5 3" would be running the model with low noise level, alpha = 0.05, with an alpha label of 5 for the output files, and with 3 runs of the model (thus 3 separate outputs).
 
