@@ -9,6 +9,9 @@ python ../fg_learn_command.py $2 $3
 cd ..
 Rscript grammar_format.R $2 $3
 
+# rename rank1 output so that we can generate a new file with smoothed rules
+python rename_rank1_output.py $2 $3
+
 # adding smoothed rules to grammar output and adding this file back into the FG folder
 python /Users/niels/Desktop/FG_project/noise_project/grammar_fix.py $2 $3
 
