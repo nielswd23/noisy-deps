@@ -1,3 +1,7 @@
+# produce a json file for our full set of token input data (loading in json file as opposed to 
+# producing token stimuli each run is clearly a lot faster)
+python deps_tokens.py 
+
 # add noise to stimuli
 python /Users/niels/Desktop/FG_project/noise_project/noisy_input_tokens.py $1 $2 $3
 
