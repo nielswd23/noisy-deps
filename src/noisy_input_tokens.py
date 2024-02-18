@@ -3,25 +3,14 @@ import random
 import os
 import numpy as np 
 import argparse
+import json
 
-
-## loading the child directed wh dependencies
-with open(r"./dependencies/seq.forms.txt") as file:
-    seq = file.readlines()
-
-with open(r"./dependencies/seq.counts.txt") as file:
-    counts = file.readlines()
-
-# defining raw input to work with tokens
-raw_input = []
-for i,num in enumerate(counts):
-    raw_input.extend([seq[i]] * int(num))
-
-l_tokenize = [word_tokenize(seq) for seq in raw_input]
-
+## loading the token dependencies 
+with open('deps_tokens.json', 'r') as file:
+    l_tokenize = json.load(file)
 
 ## code for adding noise to the input  
-list_of_dicts = [] # creates a dictionary that has the indices for the lexical items as the key and the value is which number lexical item for that dependency item (this is reversed. So it is how far away it is from the last lexical item). So we could have a dictionary like {5:2, 11:1} meaning there's a lexical item in the list with index 5 and it's one away from the last lexical item. This is because we are modeling the recency effect where we want the most remebered item to be last
+list_of_dicts = [] # creates a dictionary that has the indices for the lexical items as the key and the value is which number lexical item for that dependency item (this is reversed. So it is how far away it is from the last lexical item). So we could have a dictionary like {5:2, 11:1} meaning there's a lexical item in the list with index 5 and it's one away from the last lexical item. This is because we are modeling the recency effect where we want the most remembered item to be last
 for i,l in enumerate(l_tokenize):
     dict = {}
     n = 1
@@ -83,6 +72,9 @@ def main(prob, p_label, run_num):
     # at a = 0 our remembering prob is 1 because we remember everything. As a increases we get higher and higher forgetting as the memory prob decreases
     print(f'Proportion of forgotten lexical items: {forget_prob}') # nice to keep track of the proportion of removed lexical items
 
+    with open("../data/forget_prob_" + str(p_label) + ".txt", "a") as f: 
+        f.write("%s\n" % ("Run num " + str(run_num) + ": " + str(forget_prob))) 
+
     str_seq_unks = []
     for l in l_unks:
         str_seq_unks.append(l_to_seq(l))
@@ -104,8 +96,7 @@ def main(prob, p_label, run_num):
 
     # now create folder to run FG model and populate folders with forms and counts txt files
     label = "tokens_noise_" + str(p_label) + "_" + str(run_num)
-    folder_path = ("/Users/niels/Desktop/FG_project/noise_project/" + 
-                "fg-source-code-restore/data/" + label + "/")
+    folder_path = ("../" + "fg-source-code-restore/data/" + label + "/")
 
     os.makedirs(folder_path, exist_ok=True)
 
@@ -118,10 +109,16 @@ def main(prob, p_label, run_num):
             f.write("%s\n" % item)
 
 
-## running the model multiple times
-def run(prob, p_label, num_runs):
-    for i in range(num_runs):
-        main(prob, p_label, i+1)
+# ## running the model multiple times
+# def run(prob, p_label, num_runs):
+#     for i in range(num_runs):
+#         main(prob, p_label, i+1)
+
+# running into some problems with the full automated run when the FG learning 
+# runs in parallel. I've added this code so that I can run the model one run 
+# at a time
+def run(prob, p_label, run_num):
+    main(prob, p_label, run_num)
 
 # run(0.4, 40, 3)
 

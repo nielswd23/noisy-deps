@@ -3,7 +3,7 @@
 python deps_tokens.py 
 
 # add noise to stimuli
-python /Users/niels/Desktop/FG_project/noise_project/noisy_input_tokens.py $1 $2 $3
+python noisy_input_tokens.py $1 $2 $3
 
 # now leaning a FG on created stimuli
 cd ~/Desktop/FG_project/noise_project/fg-source-code-restore/
