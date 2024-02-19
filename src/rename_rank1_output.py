@@ -2,14 +2,22 @@ import os
 
 def mv_command(p_label, run_num):
     sub_str = "tokens_noise_" + str(p_label) + "_" + str(run_num)
-    path = ("./fg-source-code-restore/out/" + sub_str + "/" + sub_str + 
+    path = ("../fg-source-code-restore/out/" + sub_str + "/" + sub_str + 
             ".0.FG-output.rank-1")
     command = "mv " + path + ".txt " + path + "_OLD.txt" 
     return(command)
 
-def main(prob_label,num_runs):
-    for i in range(num_runs):
-        os.system(mv_command(prob_label,i+1))
+# # full automated model multiple runs
+# def main(prob_label,num_runs):
+#     for i in range(num_runs):
+#         os.system(mv_command(prob_label,i+1))
+
+# running into some problems with the full automated run when the FG learning 
+# runs in parallel. I've added this code so that I can run the model one run 
+# at a time
+def main(prob_label, num_run):
+    os.system(mv_command(prob_label, num_run))
+
 
 if __name__ == "__main__":
     import argparse
