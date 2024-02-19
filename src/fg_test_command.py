@@ -1,25 +1,35 @@
 import os 
 
 def gen_command(p_label, run_num, stim_set):
-    sub_path = "~/Desktop/FG_project/noise_project/"
+    sub_path = "~/Desktop/FG_project/noisy-deps/"
     id_str = "_" + str(p_label) + "_" + str(run_num)
     command = ("for file in " + sub_path + "stimuli/tokens_noise_" + stim_set+
                id_str + "/*.txt ; do sh test.sh " + sub_path + 
-               "fg-source-code-restore tokens_noise" + id_str + 
+               "fg-source-code-restore tokens_noise" + id_str +
                " \"$file\" ; done")
     return command 
 
-def main(prob_label, num_runs):
+# for multiple runs
+##def main(prob_label, num_runs):
+##    # pearl and liu testing
+##    ps_l = [gen_command(prob_label, i+1, "ps") for i in range(num_runs)]
+##    full_ps_com = " & ".join(ps_l) 
+##    os.system(full_ps_com)
+##
+##    # de villiers testing
+##    dev_l = [gen_command(prob_label, i+1, "dev") for i in range(num_runs)]
+##    full_dev_com = " & ".join(dev_l) 
+##    os.system(full_dev_com)
+
+# for a single run
+def main(prob_label, run_num):
     # pearl and liu testing
-    ps_l = [gen_command(prob_label, i+1, "ps") for i in range(num_runs)]
-    full_ps_com = " & ".join(ps_l) 
-    os.system(full_ps_com)
+    ps_command = gen_command(prob_label, run_num, "ps")
+    os.system(ps_command)
 
     # de villiers testing
-    dev_l = [gen_command(prob_label, i+1, "dev") for i in range(num_runs)]
-    full_dev_com = " & ".join(dev_l) 
-    os.system(full_dev_com)
-
+    dev_command = gen_command(prob_label, run_num, "dev")
+    os.system(dev_command)
 
 if __name__ == "__main__":
     import argparse

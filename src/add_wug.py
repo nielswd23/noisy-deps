@@ -74,14 +74,14 @@ def add_wug(input_path, output_path, unique_lex):
 def create_stimuli_set(p_label, run_num): 
     # getting list of unique lex items
     sub_path = "tokens_noise_" + str(p_label) + "_" + str(run_num) 
-    path = ("/Users/niels/Desktop/FG_project/noise_project/fg-source-code-" +
-        "restore/data/" + sub_path + "/" + sub_path + ".forms.txt")
+    path = ("../fg-source-code-restore/data/" + sub_path + "/" + sub_path +
+            ".forms.txt")
     l_lex = extract_lex_items(path)
 
     ## pearl sprouse stim ##
     # create a folder for new stimuli
     id_str = str(p_label) + "_" + str(run_num)
-    start_path = "/Users/niels/Desktop/FG_project/noise_project/stimuli/"
+    start_path = "../stimuli/"
     os.makedirs(start_path + "tokens_noise_ps_" + id_str, exist_ok=True)
 
     # adjunct 
@@ -152,9 +152,14 @@ def create_stimuli_set(p_label, run_num):
             start_path + "tokens_noise_dev_" + id_str + "/dev_sd.txt",
             l_lex)
 
-def main(prob_label, num_runs):
-    for i in range(num_runs):
-        create_stimuli_set(prob_label, i+1)
+# # for multiple runs
+# def main(prob_label, num_runs):
+#     for i in range(num_runs):
+#         create_stimuli_set(prob_label, i+1)
+
+# for a single run 
+def main(prob_label, run_num):
+    create_stimuli_set(prob_label, run_num)
     
 
 if __name__ == "__main__":

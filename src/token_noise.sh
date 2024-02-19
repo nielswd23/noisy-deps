@@ -20,14 +20,14 @@ python rename_rank1_output.py $2 $3
 python grammar_fix.py $2 $3
 
 # creating our testing stimuli. pulls out the lexical items from the grammar and adds WUG in the stimuli if a word doesn't appear in the grammar
-python /Users/niels/Desktop/FG_project/noise_project/add_wug.py $2 $3
+python add_wug.py $2 $3
 
 # testing FG on generated test sets
-cd ~/Desktop/FG_project/noise_project/fg-source-code-restore/
-python ../fg_test_command.py $2 $3
+cd ../fg-source-code-restore/
+python ../src/fg_test_command.py $2 $3
 
 # move output files
-cd ..
+cd ../src
 python move_output_data.py $2 $3
 
 # produce plots

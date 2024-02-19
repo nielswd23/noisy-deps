@@ -2,10 +2,9 @@ import os
 import shutil
 
 def move_data(p_label, run_num): 
-    sub_path = "/Users/niels/Desktop/FG_project/noise_project/"
     id_str = "tokens_noise_" + str(p_label) + "_" + str(run_num)
-    pl_d_path = sub_path + "data/" + id_str + "_pearl_liu"
-    extract_subpath = sub_path + "fg-source-code-restore/out/" + id_str + "/" + id_str
+    pl_d_path = "../data/" + id_str + "_pearl_liu"
+    extract_subpath = "../fg-source-code-restore/out/" + id_str + "/" + id_str
 
     # move ps and liu data with a list of file names
     l_files = [".0.pearl_stim_whether_emb_nonis.results.csv",
@@ -24,15 +23,22 @@ def move_data(p_label, run_num):
         shutil.move(extract_subpath +file, pl_d_path)
 
     # move dev data 
-    os.makedirs(sub_path + "data/" + id_str + "_dev", exist_ok=True)
-    shutil.move(extract_subpath + ".0.dev_sd.results.csv", 
-                sub_path + "data/" + id_str + "_dev")
+    os.makedirs("../data/" + id_str + "_dev", exist_ok=True)
+    shutil.move(extract_subpath + ".0.dev_sd.results.csv",
+                "../data/" + id_str + "_dev")
     shutil.move(extract_subpath + ".0.dev_ld.results.csv", 
-                sub_path + "data/" + id_str + "_dev")
+                "../data/" + id_str + "_dev")
 
-def main(prob_label, num_runs):
-    for i in range(num_runs):
-        move_data(prob_label, i+1)
+# # full automated model multiple runs
+# def main(prob_label, num_runs):
+#     for i in range(num_runs):
+#         move_data(prob_label, i+1)
+
+# running into some problems with the full automated run when the FG learning 
+# runs in parallel. I've added this code so that I can run the model one run 
+# at a time
+def main(prob_label, num_run):
+    move_data(prob_label, num_run)
 
 if __name__ == "__main__":
     import argparse
