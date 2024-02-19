@@ -6,8 +6,8 @@ python deps_tokens.py
 python noisy_input_tokens.py $1 $2 $3
 
 # now leaning a FG on created stimuli
-cd ~/Desktop/FG_project/noise_project/fg-source-code-restore/
-python ../fg_learn_command.py $2 $3
+cd ../fg-source-code-restore/
+python ../src/fg_learn_command.py $2 $3
 
 # R formating the grammar output to make reading in python easier
 cd ..
