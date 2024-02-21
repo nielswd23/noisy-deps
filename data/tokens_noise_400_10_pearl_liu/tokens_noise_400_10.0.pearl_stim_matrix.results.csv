@@ -1,0 +1,2 @@
+Sentence,ConditionedTree,MAPTree,InsideScore,MAPScore,MAPInsideRatio,Entropy,Surprisal,KL,NumParses,ExpectedNumConstituents,ExpectedBoundaries
+"null","(START  (IP  (LEX  null)))","(START (IP null ) )",-4.62790037314,-4.62905168582,0.998849349829,0.00893693025105,0.0195315746083,9.26246260089,2.,2.00115065017,2.00115065017;2.00115065017

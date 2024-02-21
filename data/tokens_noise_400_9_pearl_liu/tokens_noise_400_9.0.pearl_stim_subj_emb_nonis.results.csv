@@ -1,0 +1,2 @@
+Sentence,ConditionedTree,MAPTree,InsideScore,MAPScore,MAPInsideRatio,Entropy,Surprisal,KL,NumParses,ExpectedNumConstituents,ExpectedBoundaries
+"present think null null","(START  (IP  (LEX  present) (VP  (LEX  think) (CP  (LEX  null) (IP  (LEX  null))))))","(START (IP present (VP (LEX think ) (LEX null ) (LEX null ) ) ) )",-21.0893504738,-21.635927223,0.578928238651,1.02354919826,0.0874746689052,70.7503696763,9.,6.28875142265,2.41544815601;1.85720958953;1.00030286398;1.01579081313;3.87330326664
